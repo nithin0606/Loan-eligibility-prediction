@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <title>ML API</title>
+<style type="text/css">
+body{
+  background-image:url({{url_for('static',filename='lo1.jpg')}});
+  background-size: cover;
+  font-family:comic sans MS;}
+
+  input[type=number], select{
+  font: comic sans MS;
+  width:55%;
+  padding: 6px 10px;}
+ 
+  button[type=submit], select{
+  width:40%;
+  padding: 6px 12px;}
+  
+ .flex{
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start;}
+
+.column{
+       float:left;
+       width:30%;
+       padding:10px;}
+
+.row:after{
+     content:"";
+     display: table;
+     clear:both;}
+
+.prediction{font-size: 24pt;}
+</style>
+</head>
+
+<body>
+<center>
+ <div class="login">
+	<h1>Loan Eligibility Prediction</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+<div class="row">
+<div class="column">
+<div class="flex">
+	<label for="Gender">Choose the gender:</label>
+	<select name="Gender" >
+			<option value=1>Male</option>
+			<option value=0>Female</option>
+		</select>
+</div>
+</div>
+<div class="column">
+<div class="flex">
+    	<label for="Married">Married:</label>
+		<select name="Married" >
+			<option value=1>Yes</option>
+			<option value=0>No</option>
+		</select>
+</div>
+</div>
+<div class="column">
+<div class="flex">  
+	<label for="Dependents">Dependents:</label>
+	<input type="number" name="Dependents" placeholder="No of Dependents" required="required" />
+</div>
+</div>
+</div>
+<div class="row">
+<div class="column">	
+<div class="flex">
+	<label for="Education">Education:</label>
+		<select name="Education" >
+			<option value=1>Graduated</option>
+			<option value=0>Not Graduated</option>
+		</select>
+</div>
+</div>
+<div class="column">
+<div class="flex" >	
+	<label for="Self Employed">Self Employed:</label>
+		<select name="Self Employed">
+			<option value=1>Yes</option>
+			<option value=0>No</option>
+		</select>
+</div>
+</div>
+
+<div class="column">	
+<div class="flex">	
+	<label for="Applicant's Income">Applicant's Income:</label>
+	<input type="number" name="ApplicantIncome" placeholder=" Enter ApplicantIncome"  required="required" />
+</div>
+</div>
+</div>
+<div class="row">
+<div class="column">
+<div class="flex">
+	<label for="CoApplicant's Income">Co-Applicant's Income:</label>
+	<input type="number" name="CoapplicantIncome" placeholder="Enter Co-applicant'sIncome" required="required" />
+</div>
+</div>
+<div class="column">
+<div class="flex">	
+	<label for="Loan Amount">Loan Amount:</label>
+	<input type="number" name="LoanAmount" placeholder=" Enter LoanAmount"   required="required" />
+</div>
+</div>
+<div class="column">
+<div class="flex">	
+	<label for="Loan Amount Term (days) ">Loan Amount Term (days) :</label>
+	<input type="number" name="Loan Amount Term (days) " placeholder=" Enter Loan Amount Term"  required="required" />
+</div>
+</div>
+</div>
+<div class="row">
+<div class="column">
+<div class="flex">
+	<label for="Credit History">Credit History:</label>
+		<select name="Credit History">
+			<option value=1>Present</option>
+			<option value=0>Not Present</option>
+		</select>
+</div>
+</div>
+<div class="column">
+<div class="flex">	
+	<label for="Propert Area">Property Area:</label>
+		<select name="Property Area">
+			<option value=0>Rural</option>
+			<option value=1>Semi Urban</option>
+			<option value=2>Urban</option>
+		</select><br/><br/><br/>
+</div>
+</div>
+</div>
+ <div>	
+        <button type="submit"class="btn btn-primary btn-block btn-large">Predict</button><br/>
+ </div>
+    </form>
+
+   <br/>
+  <p class="prediction">{{ prediction_text }}</p>
+
+ </div>
+</body>
+</html>
